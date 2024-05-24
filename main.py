@@ -72,7 +72,7 @@ def main():
 				print(key_num)
 				# 判断按下的按键并触发对应函数
 				if 81 in key_num:  # 按下Q
-					os.system('cd ~/RM-yolo/RMSDK && python3 06_final.py')
+					
 
 	# 关闭端口连接
 	tcp_socket.shutdown(socket.SHUT_WR)
