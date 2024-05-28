@@ -71,16 +71,14 @@ def main():
 					key_num[i - 7] = int(game_msg[i])
 				print(key_num)
 				# 判断按下的按键并触发对应函数
-				if 81 in key_num:  # 按下Q
-					
-
-	# 关闭端口连接
+				#if 81 in key_num:  # 按下Q
+               
+# 关闭端口连接
 	tcp_socket.shutdown(socket.SHUT_WR)
 	tcp_socket.close()
 	udp_socket.shutdown(socket.SHUT_WR)
 	udp_socket.close()
 	print("Socket Closed")
-
 
 if __name__ == '__main__':
 	main()
