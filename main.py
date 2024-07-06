@@ -1,8 +1,13 @@
 import os
 import re
 import socket
-
+import robomaster
+from robomaster import robot
+from robomaster import servo
+from robomaster import uart
+from robomaster import chassis
 import select
+import time
 
 global tcp_socket
 global udp_socket
@@ -56,6 +61,16 @@ def main():
 	tcp_connect()
 	udp_connect()
 	start_get_game_msg()
+ 
+	#获取模块, https://robomaster-dev.readthedocs.io/zh-cn/latest/python_sdk/beginner_ep.html#id2
+	ep = robot.Robot()
+	ep.initialize(conn_type="sta")
+	ep_servo = ep.servo
+	ep_uart = ep.uart
+	ep_chassis = ep.chassis
+ 
+	#ep_chassis.set_pwm_value(pwm3=20)
+ 
 	while True:
 		# print("Waiting msg")
 		# 设置超时时间
@@ -71,7 +86,11 @@ def main():
 					key_num[i - 7] = int(game_msg[i])
 				print(key_num)
 				# 判断按下的按键并触发对应函数
-				#if 81 in key_num:  # 按下Q
+				if 81 in key_num:  # 按下Q
+					ep_servo.moveto(2,-60)
+					time.sleep(2)
+					ep_servo.moveto(2,120)
+               
                
 # 关闭端口连接
 	tcp_socket.shutdown(socket.SHUT_WR)
